@@ -1,9 +1,31 @@
-import React from 'react'
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import { Navbar } from "./components";
+import { About, Contact, Home, Projects } from "./pages";
 
 const App = () => {
   return (
-    <div className='font-bold text-purple-600 text-3xl'>3D Portfolio</div>
-  )
-}
+    <main className='bg-slate-300/20'>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route
+            path='/*'
+            element={
+              <>
+                <Routes>
+                  <Route path='/about' element={<About />} />
+                  <Route path='/projects' element={<Projects />} />
+                  <Route path='/contact' element={<Contact />} />
+                </Routes>
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+    </main>
+  );
+};
 
-export default App
+export default App;
